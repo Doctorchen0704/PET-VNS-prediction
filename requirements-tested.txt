@@ -1,0 +1,9 @@
+# Numerical environment tested with Python 3.12.4 on Windows.
+# This records software-test versions, not an end-to-end imaging environment.
+numpy==2.4.3
+pandas==3.0.3
+scipy==1.17.1
+scikit-learn==1.8.0
+threadpoolctl==3.6.0
+# Optional NIfTI interface tested at this version:
+nibabel==5.4.0

@@ -1,0 +1,125 @@
+{
+  "schema_version": "1.0",
+  "release_version": "0.1.0",
+  "scope": "Source-adapted core methods package, not the complete manuscript analysis archive",
+  "hash_policy": "All source_sha256 values below identify source-code files only. No study input, participant record, outcome, or image hashes are included.",
+  "path_policy": "Source paths are relative historical source filenames for attribution; these files are not runtime dependencies of this package.",
+  "sources": [
+    {
+      "source_path": "code/gate5_modeling_20260910_v1/core.py",
+      "source_sha256": "679c6e539643eb2493ff3d0d3f466176904b08de634993a09ec1a4461826c051",
+      "public_modules": ["src/pet_vns_prediction/core.py", "src/pet_vns_prediction/modeling.py"],
+      "retained_functions": ["Settings", "validate_inputs", "choose_outer_folds", "make_split_plan", "validate_split_plan", "FoldPreprocessor", "select_candidate", "run_outer_model", "assert_training_isolation", "calibration", "decision_curve", "summarize_predictions", "paired_bootstrap"],
+      "adaptations": [
+        "Retained listed definitions without numerical changes; removed unused SAGA imports.",
+        "fit_logistic delegates explicitly to the final deterministic corrected_fit implementation.",
+        "Original run_nested orchestration is replaced by a new explicit data-in/memory-out run_nested_models interface.",
+        "Public run_nested_models requires aligned unique nonempty string indices before fitting, avoiding implicit identifier coercion in training-isolation checks.",
+        "paper_settings supplies parameter-only defaults; no cohort rows, exclusions, outcomes, or private configuration access.",
+        "Synthetic fixture default size is 60; the fixture contains no real observations."
+      ]
+    },
+    {
+      "source_path": "code/gate5_numerical_correction_20260910_v4/solver.py",
+      "source_sha256": "f310b6e8d4742ade3da2538f974deb091a095b1177068e9596f3153c8e3f2f2f",
+      "public_modules": ["src/pet_vns_prediction/solver.py"],
+      "retained_functions": ["complete deterministic elastic-net solver module, including fit and independent_slsqp"],
+      "adaptations": ["Source code preserved byte-for-byte; no data access or solver substitution."]
+    },
+    {
+      "source_path": "code/gate5_numerical_correction_20260910_v4/workflow.py",
+      "source_sha256": "f9319dcf02e15762a01850d147284a7559820e678598beeb2d5023a78fa7274a",
+      "public_modules": ["src/pet_vns_prediction/workflow.py", "src/pet_vns_prediction/modeling.py"],
+      "retained_functions": ["corrected_fit", "corrected_outer"],
+      "adaptations": [
+        "Only pure fitting functions are retained; original paths, import-time private configuration reads, module monkeypatching, and filesystem orchestration are omitted.",
+        "Package-relative imports replace private source loaders.",
+        "Failure-only diagnostic candidate counts derive from the supplied grid and inner-fold count instead of fixed counts; successful numerical path is unchanged.",
+        "Public high-level orchestration stops on a failed fit and does not return incomplete prediction summaries."
+      ]
+    },
+    {
+      "source_path": "code/gate5_six_pathway_effects_20260912_v1.py",
+      "source_sha256": "5e8581b4466b2be1c45ceb62e25250bcf9519b6112921f6eed445ee96192fb3d",
+      "public_modules": ["src/pet_vns_prediction/associations.py"],
+      "retained_functions": ["fit numerical expressions, exposed as hc3_fit"],
+      "adaptations": [
+        "QR OLS, HC3 sandwich covariance, residual degrees-of-freedom inference, and independent SVD checks are preserved.",
+        "Explicit finite/full-rank input checks replace private runtime globals; independent diagnostics are returned in memory.",
+        "association_family is a new explicit six-region interface with caller-supplied covariates and declared complete multiplicity family size."
+      ]
+    },
+    {
+      "source_path": "code/subcortical_phenotype_followup_20260921_v1.py",
+      "source_sha256": "e5c5b0cf38b671e240e31f959da6fb75e7fae2500846e864935cfaaa58e97d4e",
+      "public_modules": ["src/pet_vns_prediction/associations.py"],
+      "retained_functions": ["bh algorithm and independent sorted-p reverse-cumulative-minimum verification"],
+      "adaptations": [
+        "bh_adjust accepts a complete p-value vector and explicit expected_tests instead of mutating private study records.",
+        "Private association, ablation, cohort, and output-file orchestration is not included."
+      ]
+    },
+    {
+      "source_path": "code/extract_pet_roi_features_gate4b_20260801.py",
+      "source_sha256": "adb18d003402e31da69655d31d8d6d4e5452faac296d85be2fc00e15be254935",
+      "public_modules": ["src/pet_vns_prediction/features.py", "configs/features.json"],
+      "retained_functions": ["roi_stats", "worst_status", "primary node and six-composite calculations from extract_subject"],
+      "adaptations": [
+        "Explicit array/aligned-NIfTI interfaces replace subject-path lookup and private cohort records.",
+        "Public extraction is restricted to primary nodes and composites; non-primary atlas and ancillary nodes are omitted.",
+        "Small feature-definition mappings are adapted from the original algorithm specifications without participant-specific gates."
+      ]
+    },
+    {
+      "source_path": "scripts/extract_t1_gate5_features.py",
+      "source_sha256": "ce2e5b43129ec14be4c84ecf0b63ffac889dcbd71f4f9ef14244e0344805de94",
+      "public_modules": ["src/pet_vns_prediction/features.py", "configs/features.json"],
+      "retained_functions": ["parse_aseg", "parse_aparc", "six T1 feature calculations from extract_subject"],
+      "adaptations": [
+        "Callers supply statistics or explicit statistics-file paths; no private eligibility ledger or subject directory inference.",
+        "Public wrappers add explicit input validation and omit private cohort-specific QC and filesystem output routines."
+      ]
+    },
+    {
+      "source_path": "code/build_pet_analysis_grid_preflight_20260731.py",
+      "source_sha256": "801e6c92eeca124fb008da77676677b12e50d6e565aa56313c1971aea9cce751",
+      "public_modules": ["src/pet_vns_prediction/features.py", "docs/preprocessing.md"],
+      "retained_functions": ["normalization-mask and reference-mean expressions within process"],
+      "adaptations": [
+        "normalization_masks and normalize_pet expose the three reference branches and float32 normalized-image calculation without registration or image-writing orchestration.",
+        "Original image-level QC rules are documented separately from synthetic fixtures."
+      ]
+    },
+    {
+      "source_path": "code/run_pet_analysis_grid_batch_20260731.sh",
+      "source_sha256": "fb0b76650e664e3c24325204744dc35b6beb0347cb269a1e9ca9997b410070c1",
+      "public_modules": ["docs/preprocessing.md"],
+      "retained_functions": [],
+      "adaptations": ["Documentation-only source for accepted-transform/resampling context; executable preprocessing runner is not published here."]
+    },
+    {
+      "source_path": "scripts/extract_t1_gate5_features_formal.py",
+      "source_sha256": "96c432841458c73fb9215795e565717fc3a7946e1dd2e5552d1c59ae24cc6bba",
+      "public_modules": ["docs/preprocessing.md"],
+      "retained_functions": [],
+      "adaptations": ["Documentation-only context for controlled T1 feature/QC provenance; private ledger and cohort-role functions are not published."]
+    }
+  ],
+  "synthetic_validation": {
+    "real_patient_data_read": false,
+    "real_patient_models_run": false,
+    "checks": [
+      "Full solver AST equality and retained core-definition AST equality against original source.",
+      "One synthetic CP outer fold using all 30 hyperparameter candidates and three inner folds: original and public probabilities and saved fit information exactly equal (91 fit records).",
+      "HC3 original return arrays and scalar degrees of freedom exactly equal on synthetic data.",
+      "PET six composites in three reference branches, all 19 primary-node summaries, and six T1 features exactly equal AST-selected source-function outputs on synthetic inputs.",
+      "Feature-definition subsets checked against original parameter specifications; PET normalization expressions source-reviewed.",
+      "Public unittests cover deterministic fitting, training-only preprocessing, shared split coverage, held-out label isolation, synthetic C/CP/CPT smoke fitting, string-index rejection, HC3/BH, complete 6/18-test association families, feature arrays and synthetic file interfaces."
+    ],
+    "limitations": [
+      "These tests do not reproduce real-cohort estimates or verify the complete manuscript pipeline.",
+      "The full-grid source comparison covers one synthetic CP outer fold, not all repeated folds or all supplementary routes.",
+      "No full DICOM preprocessing, segmentation, registration, PVC, PetPrep, or manuscript figure rendering was executed."
+    ]
+  }
+}

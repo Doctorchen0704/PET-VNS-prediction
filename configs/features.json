@@ -1,0 +1,62 @@
+{
+  "schema_version": "1.0.0",
+  "atlas": "FreeSurfer Desikan-Killiany aparc+aseg",
+  "analysis_grid": "individual T1-aligned, 2 mm isotropic",
+  "normalization": {
+    "primary": "supraGM",
+    "sensitivity": ["wholeBrain", "cerebellarCortex"],
+    "cortical_label_range_half_open": [1000, 3000],
+    "supratentorial_subcortical_labels": [10, 11, 12, 13, 17, 18, 26, 28, 49, 50, 51, 52, 53, 54, 58, 60],
+    "cerebellar_cortex_labels": [8, 47],
+    "reference_mean_rule": "arithmetic mean of finite PET values within reference mask and brainmask; includes finite zeros",
+    "output_dtype": "float32",
+    "image_qc_minimum_reference_voxels": {"supraGM": 5000, "wholeBrain": 10000, "cerebellarCortex": 300}
+  },
+  "bilateral_pairs": {
+    "thalamus": {"left": 10, "right": 49, "class": "subcortical_gray"},
+    "caudalanteriorcingulate": {"left": 1002, "right": 2002, "class": "cortical"},
+    "rostralanteriorcingulate": {"left": 1026, "right": 2026, "class": "cortical"},
+    "posteriorcingulate": {"left": 1023, "right": 2023, "class": "cortical"},
+    "isthmuscingulate": {"left": 1010, "right": 2010, "class": "cortical"},
+    "insula": {"left": 1035, "right": 2035, "class": "cortical"},
+    "parsopercularis": {"left": 1018, "right": 2018, "class": "cortical"},
+    "hippocampus": {"left": 17, "right": 53, "class": "subcortical_gray"},
+    "amygdala": {"left": 18, "right": 54, "class": "subcortical_gray"},
+    "entorhinal": {"left": 1006, "right": 2006, "class": "cortical"},
+    "parahippocampal": {"left": 1016, "right": 2016, "class": "cortical"},
+    "temporalpole": {"left": 1033, "right": 2033, "class": "cortical"},
+    "caudate": {"left": 11, "right": 50, "class": "subcortical_gray"},
+    "putamen": {"left": 12, "right": 51, "class": "subcortical_gray"},
+    "pallidum": {"left": 13, "right": 52, "class": "subcortical_gray"},
+    "accumbens": {"left": 26, "right": 58, "class": "subcortical_gray"},
+    "precentral": {"left": 1024, "right": 2024, "class": "cortical"},
+    "postcentral": {"left": 1022, "right": 2022, "class": "cortical"},
+    "paracentral": {"left": 1017, "right": 2017, "class": "cortical"}
+  },
+  "primary_features": {
+    "vns_thalamus": ["thalamus"],
+    "vns_cingulate": ["caudalanteriorcingulate", "rostralanteriorcingulate", "posteriorcingulate", "isthmuscingulate"],
+    "vns_insula_frontal_operculum": ["insula", "parsopercularis"],
+    "vns_limbic_medial_temporal": ["hippocampus", "amygdala", "entorhinal", "parahippocampal", "temporalpole"],
+    "vns_striatopallidal": ["caudate", "putamen", "pallidum", "accumbens"],
+    "vns_sensorimotor": ["precentral", "postcentral", "paracentral"]
+  },
+  "voxel_and_missingness_rules": {
+    "minimum_label_voxels_hard": 10,
+    "label_voxels_attention_range": [10, 24],
+    "valid_pet_fraction_pass_minimum": 0.95,
+    "valid_pet_fraction_attention_minimum": 0.8,
+    "valid_pet_voxel": "finite and strictly greater than zero",
+    "bilateral_mean": "pool valid voxels from left and right labels",
+    "composite_mean": "unweighted mean of constituent bilateral node means",
+    "missing_rule": "missing value if any constituent bilateral node mean is missing; preserve hemisphere QC flags separately"
+  },
+  "t1_features": [
+    {"name": "t1_thalamus_volume", "measure": "normalized_volume", "aseg_structures": ["Left-Thalamus", "Right-Thalamus"]},
+    {"name": "t1_cingulate_thickness", "measure": "area_weighted_thickness_mm", "aparc_parcels": ["caudalanteriorcingulate", "rostralanteriorcingulate", "posteriorcingulate", "isthmuscingulate"]},
+    {"name": "t1_insula_operculum_thickness", "measure": "area_weighted_thickness_mm", "aparc_parcels": ["insula", "parsopercularis"]},
+    {"name": "t1_medial_temporal_volume", "measure": "normalized_volume", "aseg_structures": ["Left-Hippocampus", "Right-Hippocampus", "Left-Amygdala", "Right-Amygdala"]},
+    {"name": "t1_striatopallidal_volume", "measure": "normalized_volume", "aseg_structures": ["Left-Caudate", "Right-Caudate", "Left-Putamen", "Right-Putamen", "Left-Pallidum", "Right-Pallidum"]},
+    {"name": "t1_sensorimotor_thickness", "measure": "area_weighted_thickness_mm", "aparc_parcels": ["precentral", "postcentral", "paracentral"]}
+  ]
+}

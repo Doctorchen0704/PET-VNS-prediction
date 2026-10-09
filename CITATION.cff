@@ -1,0 +1,9 @@
+cff-version: 1.2.0
+message: "Please cite the repository version or commit used. This is research software, not a validated clinical prediction tool."
+title: "PET-VNS-prediction: regional FDG-PET research methods"
+type: software
+authors:
+  - name: "PET-VNS-prediction contributors"
+license: MIT
+repository-code: "https://github.com/Doctorchen0704/PET-VNS-prediction"
+abstract: "Source-adapted feature definitions and numerical methods for a retrospective study of regional FDG-PET and response to vagus nerve stimulation. Patient data are not included."
