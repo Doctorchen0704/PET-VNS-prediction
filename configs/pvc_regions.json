@@ -1,0 +1,250 @@
+{
+  "schema_version": "1.0.0",
+  "description": "Parameter-only sGTM reference mapping: all 42 bilateral nodes (84 labels) enter the volume-weighted reference, not only the 19 nodes used by the six predictors.",
+  "source": "code/gate5_pvc_cohort_20260913_v1.py and config/pet_roi_definition_gate4b_20260801.json",
+  "bilateral_pairs": {
+    "bankssts": {
+      "left": 1001,
+      "right": 2001,
+      "class": "cortical"
+    },
+    "caudalanteriorcingulate": {
+      "left": 1002,
+      "right": 2002,
+      "class": "cortical"
+    },
+    "caudalmiddlefrontal": {
+      "left": 1003,
+      "right": 2003,
+      "class": "cortical"
+    },
+    "cuneus": {
+      "left": 1005,
+      "right": 2005,
+      "class": "cortical"
+    },
+    "entorhinal": {
+      "left": 1006,
+      "right": 2006,
+      "class": "cortical"
+    },
+    "fusiform": {
+      "left": 1007,
+      "right": 2007,
+      "class": "cortical"
+    },
+    "inferiorparietal": {
+      "left": 1008,
+      "right": 2008,
+      "class": "cortical"
+    },
+    "inferiortemporal": {
+      "left": 1009,
+      "right": 2009,
+      "class": "cortical"
+    },
+    "isthmuscingulate": {
+      "left": 1010,
+      "right": 2010,
+      "class": "cortical"
+    },
+    "lateraloccipital": {
+      "left": 1011,
+      "right": 2011,
+      "class": "cortical"
+    },
+    "lateralorbitofrontal": {
+      "left": 1012,
+      "right": 2012,
+      "class": "cortical"
+    },
+    "lingual": {
+      "left": 1013,
+      "right": 2013,
+      "class": "cortical"
+    },
+    "medialorbitofrontal": {
+      "left": 1014,
+      "right": 2014,
+      "class": "cortical"
+    },
+    "middletemporal": {
+      "left": 1015,
+      "right": 2015,
+      "class": "cortical"
+    },
+    "parahippocampal": {
+      "left": 1016,
+      "right": 2016,
+      "class": "cortical"
+    },
+    "paracentral": {
+      "left": 1017,
+      "right": 2017,
+      "class": "cortical"
+    },
+    "parsopercularis": {
+      "left": 1018,
+      "right": 2018,
+      "class": "cortical"
+    },
+    "parsorbitalis": {
+      "left": 1019,
+      "right": 2019,
+      "class": "cortical"
+    },
+    "parstriangularis": {
+      "left": 1020,
+      "right": 2020,
+      "class": "cortical"
+    },
+    "pericalcarine": {
+      "left": 1021,
+      "right": 2021,
+      "class": "cortical"
+    },
+    "postcentral": {
+      "left": 1022,
+      "right": 2022,
+      "class": "cortical"
+    },
+    "posteriorcingulate": {
+      "left": 1023,
+      "right": 2023,
+      "class": "cortical"
+    },
+    "precentral": {
+      "left": 1024,
+      "right": 2024,
+      "class": "cortical"
+    },
+    "precuneus": {
+      "left": 1025,
+      "right": 2025,
+      "class": "cortical"
+    },
+    "rostralanteriorcingulate": {
+      "left": 1026,
+      "right": 2026,
+      "class": "cortical"
+    },
+    "rostralmiddlefrontal": {
+      "left": 1027,
+      "right": 2027,
+      "class": "cortical"
+    },
+    "superiorfrontal": {
+      "left": 1028,
+      "right": 2028,
+      "class": "cortical"
+    },
+    "superiorparietal": {
+      "left": 1029,
+      "right": 2029,
+      "class": "cortical"
+    },
+    "superiortemporal": {
+      "left": 1030,
+      "right": 2030,
+      "class": "cortical"
+    },
+    "supramarginal": {
+      "left": 1031,
+      "right": 2031,
+      "class": "cortical"
+    },
+    "frontalpole": {
+      "left": 1032,
+      "right": 2032,
+      "class": "cortical"
+    },
+    "temporalpole": {
+      "left": 1033,
+      "right": 2033,
+      "class": "cortical"
+    },
+    "transversetemporal": {
+      "left": 1034,
+      "right": 2034,
+      "class": "cortical"
+    },
+    "insula": {
+      "left": 1035,
+      "right": 2035,
+      "class": "cortical"
+    },
+    "thalamus": {
+      "left": 10,
+      "right": 49,
+      "class": "subcortical_gray"
+    },
+    "caudate": {
+      "left": 11,
+      "right": 50,
+      "class": "subcortical_gray"
+    },
+    "putamen": {
+      "left": 12,
+      "right": 51,
+      "class": "subcortical_gray"
+    },
+    "pallidum": {
+      "left": 13,
+      "right": 52,
+      "class": "subcortical_gray"
+    },
+    "hippocampus": {
+      "left": 17,
+      "right": 53,
+      "class": "subcortical_gray"
+    },
+    "amygdala": {
+      "left": 18,
+      "right": 54,
+      "class": "subcortical_gray"
+    },
+    "accumbens": {
+      "left": 26,
+      "right": 58,
+      "class": "subcortical_gray"
+    },
+    "ventral_diencephalon": {
+      "left": 28,
+      "right": 60,
+      "class": "subcortical_gray_secondary"
+    }
+  },
+  "primary_features": {
+    "vns_thalamus": [
+      "thalamus"
+    ],
+    "vns_cingulate": [
+      "caudalanteriorcingulate",
+      "rostralanteriorcingulate",
+      "posteriorcingulate",
+      "isthmuscingulate"
+    ],
+    "vns_insula_frontal_operculum": [
+      "insula",
+      "parsopercularis"
+    ],
+    "vns_limbic_medial_temporal": [
+      "hippocampus",
+      "amygdala",
+      "entorhinal",
+      "parahippocampal",
+      "temporalpole"
+    ],
+    "vns_striatopallidal": [
+      "caudate",
+      "putamen",
+      "pallidum",
+      "accumbens"
+    ],
+    "vns_sensorimotor": [
+      "precentral",
+      "postcentral",
+      "paracentral"
+    ]
+  }
+}

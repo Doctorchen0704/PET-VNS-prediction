@@ -7,3 +7,6 @@ scikit-learn==1.8.0
 threadpoolctl==3.6.0
 # Optional NIfTI interface tested at this version:
 nibabel==5.4.0
+# Optional figure renderers tested at these versions:
+matplotlib==3.11.0
+Pillow==12.1.1

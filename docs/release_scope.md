@@ -1,67 +1,56 @@
-# Release scope: initial core methods package
+# Release scope: core and supplemental methods
 
-Version 0.1.0 is a source-adapted, independently usable methods package. It is
-not the complete manuscript analysis archive, a frozen cohort release, or an
-end-to-end reproduction of the paper. The historical source filenames and
-source-code SHA-256 values are listed in [source_provenance.json](source_provenance.json).
-Those original source files are not required to import or use this package.
+Version 0.2.0 is a portable adaptation of the executed study methods, not the
+private analysis archive or a pretrained prediction service. Source-code
+lineage and synthetic checks are recorded in [source_provenance.json](source_provenance.json)
+and the module documents. Historical source files are not runtime dependencies.
 
 ## Included
 
-- Primary PET reference normalization and six-region feature calculations from
-  supplied arrays or already aligned NIfTI files; six structural features from
-  supplied FreeSurfer statistics. See [preprocessing.md](preprocessing.md) for
-  exact definitions, assumptions, and the preprocessing/QC boundary.
-- The study's deterministic elastic-net solver and independent selected-fit
-  numerical checks, not a substitute generic logistic-regression estimator.
-- Training-fold-only imputation, encoding, standardization and constant-feature
-  handling; shared repeated nested-CV splits; inner Brier-score tuning and the
-  original tie-breaking rule; C/CP/CPT fitting and held-out predictions.
-- Parameter-only defaults for 20 outer repeats, three inner folds, the
-  30-candidate grid, and clinical/PET/T1 predictor definitions. Outer-fold count
-  follows the retained class-support rule. Explicit reduced-feature mappings
-  can use the same model engine but do not reproduce the whole ablation report.
-- Prediction-summary primitives, calibration, decision curves, and paired
-  bootstrap summaries of existing held-out predictions. This bootstrap is not
-  the separate development-bootstrap refitting procedure.
-- Six-region HC3 association estimates, standardized effects and explicit
-  complete-family BH adjustment; generic six-test primary and 18-test extended
-  adjustment interfaces with caller-supplied covariates.
-- Synthetic-only examples and tests. Inputs must follow the documented schema;
-  model row indices must be unique, aligned, nonempty strings, never silently coerced.
+- PET normalization, 19 primary bilateral nodes and six regional composites;
+  six T1 morphometric features from FreeSurfer statistics.
+- Non-executing FreeSurfer segmentation, registration, 2-mm analysis-grid and
+  PVC command recipes; explicit LTA geometry checks; sGTM coefficients and
+  volume-weighted 84-label reference extraction.
+- The final deterministic elastic-net solver, independent selected-fit checks,
+  training-fold preprocessing, repeated nested C/CP/CPT prediction, calibration,
+  decision curves and paired conditional fixed-OOF bootstrap summaries.
+- HC3 regional associations; complete 6-, 12-, 18- and 96-test family interfaces,
+  a secondary joint-114 correction, and leave-one-person influence diagnostics.
+- Three retuned ablations on identical supplied splits; bidirectional same-center
+  cross-scanner evaluation; 500-draw full-development bootstrap defaults with
+  duplicate-person grouped inner tuning and optimism/stability summaries.
+- The distinct processing-prediction engine: 14 CP/CPT variant models and 28
+  comparison definitions. Original-engine C/CP/CPT predictions are separate inputs.
+- Parameterized main and supplementary figure renderers, descriptive table
+  utilities, synthetic examples and software tests. Reference-anatomy assets
+  must be supplied by the caller under the relevant license.
 
-## Not included in this release
+## Outside the public release
 
-- Raw or derived participant data, real clinical/outcome tables, private cohort
-  rules or record links, study row ordering/splits, individual predictions, or
-  pretrained clinical prediction weights.
-- DICOM conversion, FreeSurfer execution, registration/resampling workflows,
-  manual image/eligibility review, atlas images, external software licenses,
-  or an automated image-to-paper pipeline.
-- PVC or PetPrep execution and the dedicated original processing-sensitivity
-  runner. Supplying alternative feature columns to the generic model interface
-  is not verification of the complete processing-sensitivity analysis.
-- Explicit corresponding-T1 12-test and processing 96-test family orchestration,
-  complete ablation comparison reports and influence analyses, the separate
-  development-bootstrap refitting analysis, or cross-scanner evaluation.
-- Final manuscript figure renderers and a one-command reproduction of all main
-  and supplementary tables and figures. No claim that this package covers every
-  analysis reported in the manuscript should be made.
+- Real images, clinical/outcome records, individual features/predictions,
+  original row ordering and split membership, private cohort rules or links,
+  pretrained clinical model weights and private execution logs.
+- Scanner reconstruction, DICOM conversion/identity reconciliation, automated
+  eligibility decisions, manual QC, external tool installation or scheduling.
+  The command recipes do not execute FreeSurfer or validate image quality.
+- PetPrep execution and redistributed reference-anatomy assets. PetPrep-derived
+  alternative feature inputs can be supplied to the sensitivity interface.
+- Private historical file joins, source-cache locks, saved-result replay readers,
+  all abandoned exploratory models, every historical descriptive report, or a
+  single script generating the manuscript from raw scans.
 
-## What has been checked
+## Verification boundary
 
-Source-adaptation checks retained the complete solver and the pure core
-definitions, and compared the original and public corrected workflow on one
-synthetic CP outer fold with all 30 candidates and three inner folds. Predicted
-probabilities and saved fit information were exactly equal for that comparison.
-The retained HC3 calculations and primary PET/T1 feature calculations were also
-compared with original functions on synthetic inputs. Public tests exercise the
-interfaces and small synthetic model runs; no real participant analysis was
-rerun to prepare this release.
+Retained numerical functions were compared to original pure definitions on
+artificial data. Checks include the primary full-grid outer-fold path, HC3/BH,
+feature arithmetic, supplemental family construction, the distinct processing
+outer-fold record, grouped development tuning and ablation evaluation. Small
+synthetic tests exercise the portable interfaces; synthetic figures are rendered
+for layout checks. Details and any edge-case adaptations are documented in the
+module pages. No real-cohort fit or imaging rerun was performed for this release.
 
-Passing these checks establishes the stated source parity and synthetic tests,
-not validation of a clinical device, manuscript-result reproduction, or support
-for every dependency version allowed by the package metadata. Review
-[reproducibility.md](reproducibility.md) before describing what was reproduced.
-Outputs generated with a caller's real data remain potentially sensitive and
-must not be committed to this public repository.
+These checks verify the stated implementation properties. They do not reproduce
+the paper's estimates without authorized frozen inputs, establish external
+clinical validity, or test every allowed dependency version. Outputs generated
+from actual participant data must remain outside this public repository.

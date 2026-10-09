@@ -22,6 +22,16 @@ Conditional intervals used 2,000 paired participant bootstrap draws of the mean 
 
 Multiple-testing families must not be narrowed after examining results. The primary six-region family, extended clinical-adjustment family, morphometric-adjustment family and processing-sensitivity family are distinct. The processing family includes tested variants even when not all variants are displayed in the paper.
 
+The supplemental implementation retains 12-test clinical/morphometric, 18-test extended-clinical and 96-test processing families, plus the source's secondary joint-114 correction. Processing-prediction fits use their own original plain-column engine. They are not inferred from an association p-value or replaced with the main modeling wrapper.
+
+Retuned ablations share nested splits. Same-center scanner holdouts fit only on the training device. The separate 500-draw development bootstrap groups duplicate copies of each sampled person in inner folds and corrects full-data apparent performance for optimism. It does not retrospectively correct the reported mean-OOF AUC. See [validation.md](validation.md) and [sensitivity.md](sensitivity.md).
+
+## Public tests and figure checks
+
+Tests and examples use only artificial arrays, artificial clinical fields and synthetic plot payloads. Optional original-source parity tests select function definitions through AST without importing historical scripts or accessing study inputs. Source-code hashes are in [source_provenance.json](source_provenance.json); additional source-specific checks are described in the module documents.
+
+Figure renderers require explicit inputs. Synthetic previews check layout and data handling, not the paper's values. Licensed reference anatomy must be supplied separately; it is not replaced with artificial images and presented as real anatomy. Export support does not establish that a particular journal's final size, typography or accessibility requirements have been met.
+
 ## Not included as public data
 
 - Clinical source records, identity crosswalks and outcome-adjudication records.
@@ -30,4 +40,3 @@ Multiple-testing families must not be narrowed after examining results. The prim
 - Private work manifests, logs, absolute machine paths and environment credentials.
 
 These exclusions protect participant confidentiality; they do not convert this internal-validation study into an independent validation study. Data may be requested from the corresponding author under the conditions described in the manuscript.
-

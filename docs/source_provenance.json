@@ -1,15 +1,32 @@
 {
   "schema_version": "1.0",
-  "release_version": "0.1.0",
-  "scope": "Source-adapted core methods package, not the complete manuscript analysis archive",
+  "release_version": "0.2.0",
+  "scope": "Source-adapted core and supplemental numerical methods, non-executing imaging recipes and parameterized manuscript figures; not the private manuscript archive",
   "hash_policy": "All source_sha256 values below identify source-code files only. No study input, participant record, outcome, or image hashes are included.",
   "path_policy": "Source paths are relative historical source filenames for attribution; these files are not runtime dependencies of this package.",
   "sources": [
     {
       "source_path": "code/gate5_modeling_20260910_v1/core.py",
       "source_sha256": "679c6e539643eb2493ff3d0d3f466176904b08de634993a09ec1a4461826c051",
-      "public_modules": ["src/pet_vns_prediction/core.py", "src/pet_vns_prediction/modeling.py"],
-      "retained_functions": ["Settings", "validate_inputs", "choose_outer_folds", "make_split_plan", "validate_split_plan", "FoldPreprocessor", "select_candidate", "run_outer_model", "assert_training_isolation", "calibration", "decision_curve", "summarize_predictions", "paired_bootstrap"],
+      "public_modules": [
+        "src/pet_vns_prediction/core.py",
+        "src/pet_vns_prediction/modeling.py"
+      ],
+      "retained_functions": [
+        "Settings",
+        "validate_inputs",
+        "choose_outer_folds",
+        "make_split_plan",
+        "validate_split_plan",
+        "FoldPreprocessor",
+        "select_candidate",
+        "run_outer_model",
+        "assert_training_isolation",
+        "calibration",
+        "decision_curve",
+        "summarize_predictions",
+        "paired_bootstrap"
+      ],
       "adaptations": [
         "Retained listed definitions without numerical changes; removed unused SAGA imports.",
         "fit_logistic delegates explicitly to the final deterministic corrected_fit implementation.",
@@ -22,15 +39,27 @@
     {
       "source_path": "code/gate5_numerical_correction_20260910_v4/solver.py",
       "source_sha256": "f310b6e8d4742ade3da2538f974deb091a095b1177068e9596f3153c8e3f2f2f",
-      "public_modules": ["src/pet_vns_prediction/solver.py"],
-      "retained_functions": ["complete deterministic elastic-net solver module, including fit and independent_slsqp"],
-      "adaptations": ["Source code preserved byte-for-byte; no data access or solver substitution."]
+      "public_modules": [
+        "src/pet_vns_prediction/solver.py"
+      ],
+      "retained_functions": [
+        "complete deterministic elastic-net solver module, including fit and independent_slsqp"
+      ],
+      "adaptations": [
+        "Source code preserved byte-for-byte; no data access or solver substitution."
+      ]
     },
     {
       "source_path": "code/gate5_numerical_correction_20260910_v4/workflow.py",
       "source_sha256": "f9319dcf02e15762a01850d147284a7559820e678598beeb2d5023a78fa7274a",
-      "public_modules": ["src/pet_vns_prediction/workflow.py", "src/pet_vns_prediction/modeling.py"],
-      "retained_functions": ["corrected_fit", "corrected_outer"],
+      "public_modules": [
+        "src/pet_vns_prediction/workflow.py",
+        "src/pet_vns_prediction/modeling.py"
+      ],
+      "retained_functions": [
+        "corrected_fit",
+        "corrected_outer"
+      ],
       "adaptations": [
         "Only pure fitting functions are retained; original paths, import-time private configuration reads, module monkeypatching, and filesystem orchestration are omitted.",
         "Package-relative imports replace private source loaders.",
@@ -41,8 +70,12 @@
     {
       "source_path": "code/gate5_six_pathway_effects_20260912_v1.py",
       "source_sha256": "5e8581b4466b2be1c45ceb62e25250bcf9519b6112921f6eed445ee96192fb3d",
-      "public_modules": ["src/pet_vns_prediction/associations.py"],
-      "retained_functions": ["fit numerical expressions, exposed as hc3_fit"],
+      "public_modules": [
+        "src/pet_vns_prediction/associations.py"
+      ],
+      "retained_functions": [
+        "fit numerical expressions, exposed as hc3_fit"
+      ],
       "adaptations": [
         "QR OLS, HC3 sandwich covariance, residual degrees-of-freedom inference, and independent SVD checks are preserved.",
         "Explicit finite/full-rank input checks replace private runtime globals; independent diagnostics are returned in memory.",
@@ -52,18 +85,33 @@
     {
       "source_path": "code/subcortical_phenotype_followup_20260921_v1.py",
       "source_sha256": "e5c5b0cf38b671e240e31f959da6fb75e7fae2500846e864935cfaaa58e97d4e",
-      "public_modules": ["src/pet_vns_prediction/associations.py"],
-      "retained_functions": ["bh algorithm and independent sorted-p reverse-cumulative-minimum verification"],
+      "public_modules": [
+        "src/pet_vns_prediction/associations.py",
+        "src/pet_vns_prediction/validation.py",
+        "src/pet_vns_prediction/sensitivity.py"
+      ],
+      "retained_functions": [
+        "bh algorithm and independent sorted-p reverse-cumulative-minimum verification",
+        "columns/ablations/evaluate semantics",
+        "18/96/114 families, standardized effects and influence diagnostics"
+      ],
       "adaptations": [
         "bh_adjust accepts a complete p-value vector and explicit expected_tests instead of mutating private study records.",
-        "Private association, ablation, cohort, and output-file orchestration is not included."
+        "Explicit in-memory association and ablation orchestration; no private cohort or output-file loading."
       ]
     },
     {
       "source_path": "code/extract_pet_roi_features_gate4b_20260801.py",
       "source_sha256": "adb18d003402e31da69655d31d8d6d4e5452faac296d85be2fc00e15be254935",
-      "public_modules": ["src/pet_vns_prediction/features.py", "configs/features.json"],
-      "retained_functions": ["roi_stats", "worst_status", "primary node and six-composite calculations from extract_subject"],
+      "public_modules": [
+        "src/pet_vns_prediction/features.py",
+        "configs/features.json"
+      ],
+      "retained_functions": [
+        "roi_stats",
+        "worst_status",
+        "primary node and six-composite calculations from extract_subject"
+      ],
       "adaptations": [
         "Explicit array/aligned-NIfTI interfaces replace subject-path lookup and private cohort records.",
         "Public extraction is restricted to primary nodes and composites; non-primary atlas and ancillary nodes are omitted.",
@@ -73,8 +121,15 @@
     {
       "source_path": "scripts/extract_t1_gate5_features.py",
       "source_sha256": "ce2e5b43129ec14be4c84ecf0b63ffac889dcbd71f4f9ef14244e0344805de94",
-      "public_modules": ["src/pet_vns_prediction/features.py", "configs/features.json"],
-      "retained_functions": ["parse_aseg", "parse_aparc", "six T1 feature calculations from extract_subject"],
+      "public_modules": [
+        "src/pet_vns_prediction/features.py",
+        "configs/features.json"
+      ],
+      "retained_functions": [
+        "parse_aseg",
+        "parse_aparc",
+        "six T1 feature calculations from extract_subject"
+      ],
       "adaptations": [
         "Callers supply statistics or explicit statistics-file paths; no private eligibility ledger or subject directory inference.",
         "Public wrappers add explicit input validation and omit private cohort-specific QC and filesystem output routines."
@@ -83,8 +138,13 @@
     {
       "source_path": "code/build_pet_analysis_grid_preflight_20260731.py",
       "source_sha256": "801e6c92eeca124fb008da77676677b12e50d6e565aa56313c1971aea9cce751",
-      "public_modules": ["src/pet_vns_prediction/features.py", "docs/preprocessing.md"],
-      "retained_functions": ["normalization-mask and reference-mean expressions within process"],
+      "public_modules": [
+        "src/pet_vns_prediction/features.py",
+        "docs/preprocessing.md"
+      ],
+      "retained_functions": [
+        "normalization-mask and reference-mean expressions within process"
+      ],
       "adaptations": [
         "normalization_masks and normalize_pet expose the three reference branches and float32 normalized-image calculation without registration or image-writing orchestration.",
         "Original image-level QC rules are documented separately from synthetic fixtures."
@@ -93,16 +153,136 @@
     {
       "source_path": "code/run_pet_analysis_grid_batch_20260731.sh",
       "source_sha256": "fb0b76650e664e3c24325204744dc35b6beb0347cb269a1e9ca9997b410070c1",
-      "public_modules": ["docs/preprocessing.md"],
+      "public_modules": [
+        "docs/preprocessing.md",
+        "src/pet_vns_prediction/preprocessing.py",
+        "docs/imaging_recipes.md"
+      ],
       "retained_functions": [],
-      "adaptations": ["Documentation-only source for accepted-transform/resampling context; executable preprocessing runner is not published here."]
+      "adaptations": [
+        "Numerical command options retained as non-executing argument lists; scheduling, fixed directories and cohort loop removed."
+      ]
     },
     {
       "source_path": "scripts/extract_t1_gate5_features_formal.py",
       "source_sha256": "96c432841458c73fb9215795e565717fc3a7946e1dd2e5552d1c59ae24cc6bba",
-      "public_modules": ["docs/preprocessing.md"],
+      "public_modules": [
+        "docs/preprocessing.md"
+      ],
       "retained_functions": [],
-      "adaptations": ["Documentation-only context for controlled T1 feature/QC provenance; private ledger and cohort-role functions are not published."]
+      "adaptations": [
+        "Documentation-only context for controlled T1 feature/QC provenance; private ledger and cohort-role functions are not published."
+      ]
+    },
+    {
+      "source_path": "code/cp_validation_20260921_v1.py",
+      "source_sha256": "9292c6cae327522f8965821e2fdaf8f959c8f200647ed58d30ca0231ff430427",
+      "public_modules": [
+        "src/pet_vns_prediction/validation.py"
+      ],
+      "adaptations": [
+        "Grouped inner plans, develop, conditional intervals, same-center device holdouts and full-development bootstrap. In-memory interfaces and explicit failures replace private file orchestration."
+      ]
+    },
+    {
+      "source_path": "code/verify_cp_validation_20260921_v1.py",
+      "source_sha256": "506997a4cc76cd5c7c5b0e554a9cbcf5a7ca2b2edb2dd2d96284bc3426b3126b",
+      "public_modules": [
+        "src/pet_vns_prediction/validation.py"
+      ],
+      "adaptations": [
+        "Independent AUC/Brier reconstruction checks used in artificial parity tests; private saved-result verifier not bundled."
+      ]
+    },
+    {
+      "source_path": "code/gate5_source_revision_20260920_v4.py",
+      "source_sha256": "0dcb6be2d3da36579cb272b3ca49294ea9ba0816f703adb03e4ed3ab857ee091",
+      "public_modules": [
+        "src/pet_vns_prediction/sensitivity.py"
+      ],
+      "adaptations": [
+        "Explicit 12-test clinical/morphometric family; input tables supplied by caller."
+      ]
+    },
+    {
+      "source_path": "code/gate5_method_exploration_20260910_v1/common.py",
+      "source_sha256": "0239d40534d63412598bf86bddb1856c19c809b7d8abbcdbd6502047ff5fbe11",
+      "public_modules": [
+        "src/pet_vns_prediction/sensitivity.py"
+      ],
+      "adaptations": [
+        "Only executed plain-column Brier-tuned processing branch; retains both inner AUC/Brier records and independent train/test numerical checks. No abandoned transforms ported."
+      ]
+    },
+    {
+      "source_path": "code/full_cohort_20260921_other_routes.py",
+      "source_sha256": "82d9acc8b020e89b16ed4bfa3f774bf6823427732b59caabe654d4e448103401",
+      "public_modules": [
+        "src/pet_vns_prediction/sensitivity.py"
+      ],
+      "adaptations": [
+        "Fourteen processing CP/CPT model definitions; original clinical/T1 values retained and seven explicit alternative PET matrices supplied."
+      ]
+    },
+    {
+      "source_path": "code/full_cohort_20260921_other_routes_evaluate.py",
+      "source_sha256": "8a4bd55209e824b6aedace9269d3ab1bb0373ed34641010e0bd568aafc20e256",
+      "public_modules": [
+        "src/pet_vns_prediction/sensitivity.py"
+      ],
+      "adaptations": [
+        "Twenty-eight processing comparison definitions only; original CORE predictions supplied separately; private historical evaluator not ported."
+      ]
+    },
+    {
+      "source_path": "code/run_freesurfer_batch.sh",
+      "source_sha256": "2af7f28963f02b25231412eb5ad0ea104fec00d2cae88771a6666fa615e2f4e7",
+      "public_modules": [
+        "src/pet_vns_prediction/preprocessing.py"
+      ],
+      "adaptations": [
+        "Non-executing recon-all command recipe; no scheduling or subject discovery."
+      ]
+    },
+    {
+      "source_path": "code/run_pet_registration_batch_20260731.sh",
+      "source_sha256": "6af4ab1360659610432ec9f47f7e7e1cec1f11b0d0ed12d751e116043a46e6a3",
+      "public_modules": [
+        "src/pet_vns_prediction/preprocessing.py"
+      ],
+      "adaptations": [
+        "Non-executing mri_coreg six-DOF recipe with source seed and saturation options."
+      ]
+    },
+    {
+      "source_path": "code/gate5_pvc_cohort_20260913_v1.py",
+      "source_sha256": "a6a2713cfdffe5be2fb9524dcb705f89ee529ce2d1f2e68786de2667208277b5",
+      "public_modules": [
+        "src/pet_vns_prediction/preprocessing.py"
+      ],
+      "adaptations": [
+        "GTMseg/PVC command recipes, unrounded coefficient extraction and 84-label volume-weighted reference. Private paths and scheduler omitted; success flag renamed neutrally."
+      ]
+    },
+    {
+      "source_path": "code/gate5_pvc_lta_preflight_20260912.py",
+      "source_sha256": "51449c0c6932bf9239783e97e8a32d92398f261d76b9f872d152b1d7b6121781",
+      "public_modules": [
+        "src/pet_vns_prediction/preprocessing.py"
+      ],
+      "adaptations": [
+        "Explicit LTA parsing and geometry equations; fake I/O only in original-source parity check."
+      ]
+    },
+    {
+      "source_path": "code/full_cohort_20260921_descriptives.py",
+      "source_sha256": "6b27376aa1a7cdb4a32f9377073bb13564f0f6058c3cb32456b1d99825758173",
+      "public_modules": [
+        "src/pet_vns_prediction/tables.py"
+      ],
+      "adaptations": [
+        "Explicit caller-supplied continuous/category fields and descriptive summaries; no clinical extraction, private cohort assertions or result writers."
+      ]
     }
   ],
   "synthetic_validation": {
@@ -114,12 +294,110 @@
       "HC3 original return arrays and scalar degrees of freedom exactly equal on synthetic data.",
       "PET six composites in three reference branches, all 19 primary-node summaries, and six T1 features exactly equal AST-selected source-function outputs on synthetic inputs.",
       "Feature-definition subsets checked against original parameter specifications; PET normalization expressions source-reviewed.",
-      "Public unittests cover deterministic fitting, training-only preprocessing, shared split coverage, held-out label isolation, synthetic C/CP/CPT smoke fitting, string-index rejection, HC3/BH, complete 6/18-test association families, feature arrays and synthetic file interfaces."
+      "Public unittests cover deterministic fitting, training-only preprocessing, shared split coverage, held-out label isolation, synthetic C/CP/CPT smoke fitting, string-index rejection, HC3/BH, complete 6/18-test association families, feature arrays and synthetic file interfaces.",
+      "Eight preprocessing tests; AST-selected original sGTM numerical extraction exactly matched artificial positive and retained-negative coefficients; geometry/LTA parsing matched for both supported transform types.",
+      "Original grouped development, conditional intervals and ablation evaluation matched exactly on small synthetic fixtures; 500/2000 production defaults are not used as smoke-test sizes.",
+      "Twelve-test association family maximum numeric difference 3.3306690738754696e-16; 114-test association and influence ranges exactly equal on artificial data.",
+      "Processing branch complete selected outer-fold dictionary exactly equal to the original plain-column branch, including numerical certificates.",
+      "61 integrated unit tests passed with three optional AST-only original-source checks enabled; seven figure/table tests are included.",
+      "Five synthetic figures were rendered and visually inspected; export tests check native TIFF/SVG, overwrite refusal and required source raster resolution."
     ],
     "limitations": [
-      "These tests do not reproduce real-cohort estimates or verify the complete manuscript pipeline.",
-      "The full-grid source comparison covers one synthetic CP outer fold, not all repeated folds or all supplementary routes.",
-      "No full DICOM preprocessing, segmentation, registration, PVC, PetPrep, or manuscript figure rendering was executed."
+      "No actual study data fits or full external imaging pipeline were rerun for public-package preparation.",
+      "Artificial parity checks cover stated functions and small configurations, not every repeated study fit, private saved-output file or complete historical execution.",
+      "FreeSurfer commands are recipes, not executed imaging verification; licensed anatomy and manual image/clinical QC are caller responsibilities.",
+      "Figure renderers receive explicit payloads; synthetic layout checks are not reproduction of manuscript values."
     ]
-  }
+  },
+  "figure_sources": [
+    {
+      "source_label": "Figure1_text_revised_renderer.py",
+      "source_sha256": "d16d0037e3e41161c46c45f552ce8c9d6a7027516ab84922c32e0d561034208b",
+      "public_modules": [
+        "src/pet_vns_prediction/figures.py"
+      ]
+    },
+    {
+      "source_label": "Figure3_text_revised_renderer.py",
+      "source_sha256": "2e3cdcaa55a96411a4e983021b43b9d9c51304b9586d53a806f2ad84307f8f9c",
+      "public_modules": [
+        "src/pet_vns_prediction/figures.py"
+      ]
+    },
+    {
+      "source_label": "Figure 2 v7 export_figure.py",
+      "source_sha256": "00ed5dac0c63b1603073498c52066ec821ad5b2ae2144953df12835b54591079",
+      "public_modules": [
+        "src/pet_vns_prediction/figures.py"
+      ]
+    },
+    {
+      "source_label": "Figure 2 v6 build_preview.py",
+      "source_sha256": "da2e425074c3155b55f217d94bdd1dfb95c195a0c065c711ac33941a27d7f435",
+      "public_modules": [
+        "src/pet_vns_prediction/figures.py"
+      ]
+    },
+    {
+      "source_label": "Figure 2 v2 build_figure2_v2.py",
+      "source_sha256": "52aeb96930606d70df085cdc5cf37e8a014507e119561968f47b741ef36724c9",
+      "public_modules": [
+        "src/pet_vns_prediction/figures.py"
+      ]
+    },
+    {
+      "source_label": "Figure 2 v1 build_figure2.py",
+      "source_sha256": "985a5bc01aea35f1ccb182fbef98a620a9ebc0c12c7d11ced8ef098c52542b0f",
+      "public_modules": [
+        "src/pet_vns_prediction/figures.py"
+      ]
+    },
+    {
+      "source_label": "revise_figure_s1.py",
+      "source_sha256": "9b3745b9709fba4b70eec71b1f0851a333ab91fbae318d2862c2c8bc943d9a79",
+      "public_modules": [
+        "src/pet_vns_prediction/figures.py"
+      ]
+    },
+    {
+      "source_label": "Supplement export_600dpi.py",
+      "source_sha256": "893ce4ef1113081ec86d493f37de01c9341110335140c93acbf6863c2e3ea843",
+      "public_modules": [
+        "src/pet_vns_prediction/figures.py"
+      ]
+    },
+    {
+      "source_label": "Validation_build_preview.py",
+      "source_sha256": "9b8861344fea633eabf2cafec394cfa2a3d9d4ba7ca2e941c8c6283f241c41ce",
+      "public_modules": [
+        "src/pet_vns_prediction/figures.py"
+      ]
+    },
+    {
+      "source_label": "build_Processing_preview.py",
+      "source_sha256": "6b59e87eacb1ab16cdf690b97bac0f46a34292c1450403b8756613af13379f12",
+      "public_modules": [
+        "src/pet_vns_prediction/figures.py"
+      ]
+    },
+    {
+      "source_label": "build_Figure3_prediction.py",
+      "source_sha256": "dcce5bd7aaa5fbdf5730dc0551667da9183fd7f9c6e274467ca2fd7a6cf01381",
+      "public_modules": [
+        "src/pet_vns_prediction/figures.py"
+      ]
+    },
+    {
+      "source_label": "full_cohort_20260921_descriptives.py",
+      "source_sha256": "6b27376aa1a7cdb4a32f9377073bb13564f0f6058c3cb32456b1d99825758173",
+      "public_modules": [
+        "src/pet_vns_prediction/figures.py"
+      ]
+    }
+  ],
+  "figure_adaptations": [
+    "Source layouts/marks/limits are parameterized with caller inputs; original source chaining/private paths removed.",
+    "No source-anatomy raster/surface files, patient distributions, original counts, predictions or figure data are distributed.",
+    "Synthetic placeholders explicitly identify themselves as not anatomy; real anatomy generation is outside this release."
+  ]
 }
