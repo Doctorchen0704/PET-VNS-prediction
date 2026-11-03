@@ -1,0 +1,3 @@
+source_nii	source_json	target_nii	review_pass	attention_note	pet_metadata_patch_json	metadata_patch_reviewed
+example01/t1_all_series/selected.nii.gz	example01/t1_all_series/selected.json	sub-example01/anat/sub-example01_T1w.nii.gz	HOLD			NO
+example01/pet_all_series/selected.nii.gz	example01/pet_all_series/selected.json	sub-example01/pet/sub-example01_pet.nii.gz	HOLD			NO

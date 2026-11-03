@@ -1,0 +1,30 @@
+{
+  "purpose": "Explicit executed adjustment definitions; do not make families symmetric by changing them",
+  "clinical5": ["age_at_implant_years", "male", "epilepsy_duration_reported_years", "log1p_baseline_monthly_frequency", "mri_lesional"],
+  "full_sample_zscored_columns": ["age_at_implant_years", "epilepsy_duration_reported_years", "log1p_baseline_monthly_frequency"],
+  "primary6": {
+    "tests": 6,
+    "adjustment": "intercept + response + clinical5 + scanner_indicator",
+    "correction": "Benjamini-Hochberg across all six primary regional tests"
+  },
+  "morphometric12": {
+    "tests": 12,
+    "first_six": "intercept + response + clinical5; scanner is NOT in this first adjustment",
+    "second_six": "intercept + response + clinical5 + scanner_indicator + corresponding regional T1",
+    "correction": "One Benjamini-Hochberg family across these twelve tests",
+    "implementation": "pet_vns_prediction.sensitivity.clinical_morphometric_family"
+  },
+  "clinical18": {
+    "tests": 18,
+    "base": "intercept + response + clinical5 + scanner_indicator",
+    "additions": ["epilepsy_type two dummies", "etiology two dummies", "both dummy blocks"],
+    "correction": "One Benjamini-Hochberg family across eighteen tests"
+  },
+  "processing96": {
+    "tests": 96,
+    "variants": 8,
+    "regions": 6,
+    "adjustments": ["intercept + response + clinical5 + scanner_indicator", "intercept + response + clinical5 + scanner_indicator + corresponding regional T1"],
+    "correction": "One Benjamini-Hochberg family across all ninety-six tests"
+  }
+}

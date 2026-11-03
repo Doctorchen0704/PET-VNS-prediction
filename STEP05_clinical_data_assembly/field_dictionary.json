@@ -1,0 +1,32 @@
+{
+  "study_id": "Verified de-identified key; not patient name, registration number or inferred folder order",
+  "clinical_input_columns": {
+    "age_at_implant_years": "Age at implantation, years",
+    "sex": "female or male",
+    "epilepsy_duration_reported_years": "Reported duration of epilepsy, years",
+    "baseline_monthly_frequency": "History-reported mean monthly total seizure frequency; no 28/30-day conversion",
+    "mri_lesional_status": "nonlesional or lesional, based on final preoperative clinical judgment",
+    "responder_12m": "0=less than 50% reduction; 1=at least 50% reduction, using the frozen clinical adjudication"
+  },
+  "pet_columns_in_order": [
+    "pet_supraGM__vns_thalamus",
+    "pet_supraGM__vns_cingulate",
+    "pet_supraGM__vns_insula_frontal_operculum",
+    "pet_supraGM__vns_limbic_medial_temporal",
+    "pet_supraGM__vns_striatopallidal",
+    "pet_supraGM__vns_sensorimotor"
+  ],
+  "t1_columns_in_order": [
+    "t1__t1_thalamus_volume",
+    "t1__t1_cingulate_thickness",
+    "t1__t1_insula_operculum_thickness",
+    "t1__t1_medial_temporal_volume",
+    "t1__t1_striatopallidal_volume",
+    "t1__t1_sensorimotor_thickness"
+  ],
+  "missing_values": "Empty CSV cells are missing, not zero; unknown categories are not silently recoded",
+  "metadata_scanner_indicator": "Explicit 0/1 device indicator with documented reference; used for association only",
+  "metadata_scanner": "Two actual device labels as strings; used for same-center scanner holdout",
+  "metadata_epilepsy_type": "generalized, focal, combined_generalized_and_focal",
+  "metadata_etiology_group": "unknown, structural, other_known; fixed grouping from the analysis plan"
+}

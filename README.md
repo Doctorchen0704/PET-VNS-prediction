@@ -1,50 +1,51 @@
-# PET-VNS-prediction
+# PET–VNS：逐步运行的分析代码
 
-Research code accompanying **Preoperative regional FDG uptake and response to vagus nerve stimulation in drug-resistant epilepsy**.
+[English guide](README_EN.md)
 
-This repository is a portable, source-adapted release of numerical methods and feature definitions from the study. It is not a distribution of the private study workspace, a pretrained model, or a clinical prediction service. Patient data are not included.
+手动脚本版1.0.0，共用已验证的0.3.0数值函数；本轮没有更换数值算法。
 
-## Scope
+这是一套供研究人员手动运行的科研脚本。每次只启动一个STEP或其中一个子步骤，
+查看输出并完成相应检查后，再手动运行下一步。没有自动总控、后台续跑或自动纳排。
 
-Version 0.3.0 adds explicit-manifest DICOM conversion/BIDS promotion, a frozen-input prediction CLI, and the integrated metabolic-pattern/molecular-atlas numerical extension. The regional core, retuned ablations, cross-scanner evaluation, development bootstrap, processing sensitivity and figure/table interfaces are retained. See the [ordered workflow](docs/end_to_end.md), [spatial extension](docs/spatial_extension.md), [manuscript code map](docs/manuscript_code_map.md) and [release scope](docs/release_scope.md). A controlled companion supplies study-specific inputs and source records to authorized reviewers. This public repository alone does not contain the clinical data, identity decisions, anatomical assets or all exact publication-rendering dependencies.
+从本目录运行命令；软件安装见`environment/README.md`。每个STEP的README写明
+输入、输出、命令和检查点。路径由命令行提供，源码不绑定某台电脑或某个账户。
 
-The clinical-only model is denoted C; CP adds six PET regional composites; CPT additionally includes six morphometric features. The regional features represent anatomical composites, not estimates of individual functional connectivity or mechanistic pathways.
+| 顺序 | 目录 | 内容 | 主要环境 |
+|---|---|---|---|
+| 1 | STEP01_dicom2bids | DICOM转换、人工选片、BIDS目录整理 | Python＋dcm2niix |
+| 2 | STEP02_T1_segmentation | 单例FreeSurfer分区、人工QC | Linux/WSL＋FreeSurfer |
+| 3 | STEP03_PET_T1_registration | 单例刚体配准、2mm分析网格、人工QC | Linux/WSL＋FreeSurfer |
+| 4 | STEP04_feature_extraction | PET六区域/82脑区、T1特征；独立PVC子步骤 | Python；PVC另需FreeSurfer |
+| 5 | STEP05_clinical_data_assembly | 按研究编号合并临床、结局和影像表 | Python |
+| 6 | STEP06_regional_associations | 固定调整模型和完整FDR校正族 | Python |
+| 7 | STEP07_prediction_models | C/CP/CPT重复嵌套交叉验证；保存预测的摘要另列 | Python |
+| 8 | STEP08_sensitivity_analyses | 消融、设备、bootstrap及处理敏感性，逐项运行 | Python |
+| 9 | STEP09_spatial_pattern_and_atlas | PC1、分子图谱、外部空间复现及条件分析 | Python＋有权限的图谱/外部输入 |
+| 10 | STEP10_tables_and_figures | 结果表、主图和补充图；可选标准脑资产生成 | Python；三维资产另需PyVista/VTK |
 
-## Installation
+## 如何使用
 
-Use a separate Python environment, then from this directory run:
+1. 把原始数据放在代码目录以外；确认受试者对应和选定序列。
+2. 按STEP01说明执行转换和整理。身份和选片由人确认，程序不猜测。
+3. STEP02、03完成后实际查看分区、配准和覆盖图，在QC表记录结论。
+4. 各步骤使用新的输出目录，不覆盖输入或失败目录。已有合格结果可以直接复用，
+   从需要的STEP开始，不必重跑FreeSurfer。
+5. 依次完成特征、数据合并、统计和作图。纳排、结局及参数以固定研究记录为准，
+   不根据新运行的AUC或P值修改。
 
-```sh
-python -m pip install -e ".[imaging,figures]"
-python -m unittest discover -s tests -v
-python examples/synthetic_demo.py
-python examples/synthetic_supplement.py
-python -m pet_vns_prediction.cli environment
-```
+`src/pet_vns_prediction`仅是各STEP共用的普通数值函数，避免在不同脚本中重复
+写同一公式；不负责调度步骤。`step_support.py`仅提供读写文件、路径和手工QC表检查。
+`configs`保存区域定义，不含患者资料；人工输入模板位于各STEP目录。
 
-Public tests use synthetic inputs. Passing them checks the specified software properties; it does not reproduce the manuscript results or establish external validity. Real-data reproduction checks, where performed, are reported separately in `docs/verification_20261103.json`, without participant data. The allowed dependency ranges in `pyproject.toml` are installation constraints, not a claim that all versions in those ranges have been tested.
+## 本研究的私有输入
 
-The demonstrations use reduced repetitions, penalty grids and bootstrap counts for short artificial-data runs. The library's full study defaults remain available from `paper_settings()` and the documented supplemental interfaces. See the [input schema](docs/data_schema.md) before using authorized research data. For synthetic figure previews and caller-supplied anatomy requirements, see [figure documentation](docs/figures.md).
+作者的受控交接材料另有`study_inputs_PRIVATE`，与代码目录并列，包含实际研究
+名单、临床/结局表、固定分折、图谱数组和结果参照。它不属于公开代码，不能上传
+公共仓库。原始DICOM另行提供，不重复压入代码包。
 
-`requirements-tested.txt` records the numerical dependency versions used for software checks. These are distinct from the full imaging-processing environment.
+原始影像、分割和配准的处理在本轮整理中未重新运行。代码验证、数值复现和
+人工图像QC是不同检查；具体已验证范围在交接说明中列出。部分历史处理敏感性
+仅保留特征表，详见STEP06/08；外部公开队列在STEP09从固定ROI输入开始，
+不把它误称为VNS应答模型的外部验证。
 
-## Methods and interpretation
-
-- Preprocessing is learned from the training data within each fold. Held-out observations are not used to fit imputation or scaling.
-- The prediction implementation retains the study's deterministic penalized solver; it is not replaced by an unrelated off-the-shelf estimator.
-- Model tuning uses the mean inner-validation Brier score. Compared models must use the same folds.
-- The processing-sensitivity prediction branch retains its own executed fitting and numerical-check procedure; it is not silently substituted by the primary engine.
-- The study's summary AUC is calculated from each participant's mean held-out probability across repetitions. It is not the measured performance of a single final model in a new external cohort.
-- Resampling already computed held-out predictions gives conditional performance intervals. This is distinct from refitting the complete modeling procedure in a development bootstrap.
-- The 96-test processing association family includes all eight variants, even when only a subset is displayed. Cross-scanner evaluation is a same-center stress test, not external validation.
-- Regional associations and predictions answer different questions. Neither establishes a mechanism of VNS action.
-
-## Data access and privacy
-
-The clinical records, images, participant-level feature matrices, outcomes, predictions, and original participant-specific split plans are not publicly distributed. Research data access requires a request to and approval by the corresponding author, subject to applicable institutional and ethical requirements. Do not post patient information in GitHub issues or pull requests.
-
-Synthetic examples are artificial and cannot be used to recover the manuscript's reported estimates. Reproducing those estimates requires authorized access to the frozen study inputs, their ordering and split plan, and the relevant execution environment.
-
-## Citation and license
-
-Use `CITATION.cff` and identify the exact commit or release used. No DOI is assigned by this repository itself. The authors' code is released under the MIT license; see [third-party notices](THIRD_PARTY_NOTICES.md) for external dependencies.
+代码重组不改变实际分析或论文结果。

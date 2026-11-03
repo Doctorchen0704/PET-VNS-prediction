@@ -1,0 +1,7 @@
+{
+  "schema_version": 1,
+  "rows": [
+    {"subject": "example01", "modality": "T1", "source_relative": "example01/T1", "identity_reviewed": false, "series_reviewed": false},
+    {"subject": "example01", "modality": "PET", "source_relative": "example01/PET", "identity_reviewed": false, "series_reviewed": false}
+  ]
+}
