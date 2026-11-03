@@ -1,11 +1,18 @@
-# Release scope: core and supplemental methods
+# Release scope: regional methods and integrated spatial extension
 
-Version 0.2.0 is a portable adaptation of the executed study methods, not the
+Version 0.3.0 is a portable adaptation of the executed study methods, not the
 private analysis archive or a pretrained prediction service. Source-code
 lineage and synthetic checks are recorded in [source_provenance.json](source_provenance.json)
 and the module documents. Historical source files are not runtime dependencies.
 
 ## Included
+
+- Reviewed-manifest DICOM conversion and selected-series BIDS promotion, with
+  fresh-output safeguards and separate identity/metadata/visual-QC gates.
+- Frozen-input C/CP/CPT command line and environment reporting. It distinguishes
+  model refitting from recalculating metrics from saved predictions.
+- Original and external cohort PCA, bootstrap, molecular annotation, spatial
+  null, alternative-SERT and DAT-conditioning kernels; see spatial_extension.md.
 
 - PET normalization, 19 primary bilateral nodes and six regional composites;
   six T1 morphometric features from FreeSurfer statistics.
@@ -31,12 +38,12 @@ and the module documents. Historical source files are not runtime dependencies.
 - Real images, clinical/outcome records, individual features/predictions,
   original row ordering and split membership, private cohort rules or links,
   pretrained clinical model weights and private execution logs.
-- Scanner reconstruction, DICOM conversion/identity reconciliation, automated
+- Scanner reconstruction, source identity reconciliation, automated
   eligibility decisions, manual QC, external tool installation or scheduling.
   The command recipes do not execute FreeSurfer or validate image quality.
 - PetPrep execution and redistributed reference-anatomy assets. PetPrep-derived
   alternative feature inputs can be supplied to the sensitivity interface.
-- Private historical file joins, source-cache locks, saved-result replay readers,
+- Private historical file joins, source-cache locks, most saved-result replay readers,
   all abandoned exploratory models, every historical descriptive report, or a
   single script generating the manuscript from raw scans.
 
@@ -48,7 +55,9 @@ feature arithmetic, supplemental family construction, the distinct processing
 outer-fold record, grouped development tuning and ablation evaluation. Small
 synthetic tests exercise the portable interfaces; synthetic figures are rendered
 for layout checks. Details and any edge-case adaptations are documented in the
-module pages. No real-cohort fit or imaging rerun was performed for this release.
+module pages. Version-specific real-cohort checks are recorded in
+verification_20261103.json. No imaging rerun or clinical readjudication was
+performed while preparing this release.
 
 These checks verify the stated implementation properties. They do not reproduce
 the paper's estimates without authorized frozen inputs, establish external

@@ -1,6 +1,7 @@
 {
   "schema_version": "1.0",
   "release_version": "0.2.0",
+  "record_status": "Historical v0.2.0 source-adaptation and test record retained unchanged below. Statements about no real-data refits refer to that preparation only; v0.3.0 checks are separately reported in verification_20261103.json. Extension lineage is in extension_source_provenance.json.",
   "scope": "Source-adapted core and supplemental numerical methods, non-executing imaging recipes and parameterized manuscript figures; not the private manuscript archive",
   "hash_policy": "All source_sha256 values below identify source-code files only. No study input, participant record, outcome, or image hashes are included.",
   "path_policy": "Source paths are relative historical source filenames for attribution; these files are not runtime dependencies of this package.",

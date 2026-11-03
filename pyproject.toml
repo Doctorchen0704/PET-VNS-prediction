@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "pet-vns-prediction"
-version = "0.2.0"
+version = "0.3.0"
 description = "Source-adapted research methods for regional FDG-PET and VNS outcome prediction"
 readme = "README.md"
 requires-python = ">=3.11"
@@ -21,6 +21,9 @@ dependencies = [
 imaging = ["nibabel>=5.2,<6"]
 figures = ["matplotlib>=3.10,<4", "Pillow>=10,<13"]
 test = ["pytest>=8,<9"]
+
+[project.scripts]
+pet-vns = "pet_vns_prediction.cli:main"
 
 [tool.setuptools.packages.find]
 where = ["src"]

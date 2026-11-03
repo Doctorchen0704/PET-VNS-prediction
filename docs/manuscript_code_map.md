@@ -5,6 +5,7 @@ predictions or reference-anatomy images are bundled.
 
 | Analysis or output | Public module | Required inputs / boundary |
 | --- | --- | --- |
+| DICOM conversion and selected-series BIDS promotion | `intake`, `cli` | Private reviewed manifests and original sources; fresh output only; no automatic identity or visual pass |
 | Image-processing recipes and PVC extraction | `preprocessing` | Explicit image/LTA paths, separately installed FreeSurfer; recipes do not execute commands; manual QC remains external |
 | PET normalization and six composites | `features`, `configs/features.json` | Accepted aligned PET, labels and brain mask; relative uptake, not SUV |
 | T1 morphometry | `features` | Caller-supplied FreeSurfer statistics and eTIV |
@@ -20,6 +21,11 @@ predictions or reference-anatomy images are bundled.
 | Figure 3 prediction summaries | `figures` | Held-out ROC/AUC, calibration, Brier score and supplied ablation intervals |
 | Supplementary validation and processing figures | `figures` | Explicit validation/processing summaries; plotting subsets must retain original full-family q values |
 | Descriptive table | `tables` | Authorized tabular input; no baseline significance tests added |
+| Original cohort CLR/PCA and participant bootstrap | `vns_pattern` | Frozen 82-region order, original covariance-PCA and scanner-stratified convention |
+| Molecular annotation and conditional spatial tests | `molecular_annotation`, `vns_spatial`, `spatial` | Approved receptor maps, cortical crosswalk, coordinates/gradients; fixed full families |
+| Healthy and TLE independent spatial analyses | `spatial`, `spatial_tle` | Their distinct frozen lists, input matrices and sign/resampling definitions |
+| SERT source and DAT comparator checks | `atlas_specificity`, `dat_conditioning` | Saved observed, bootstrap and null maps, matched atlas ordering |
+| Integrated Figure 4 and final publication-label patches | Controlled review package source snapshot | Exact renderer/asset dependencies; not yet wrapped by public `figures` |
 
 ## Start with artificial data
 

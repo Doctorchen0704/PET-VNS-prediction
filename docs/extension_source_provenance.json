@@ -1,0 +1,87 @@
+{
+  "package": "PET-VNS-prediction",
+  "scope": "Portable numerical extension. The source-adaptation checks recorded here used artificial data; subsequent real-cohort PCA-only checks are reported in verification_20261103.json. No patient data are distributed.",
+  "sources": [
+    {
+      "source_project_relative_path": "outputs/depict_healthy_replication_20261024_v1/code/analysis_engine.py",
+      "source_sha256": "8e3970c086c742181fcae22c8638faa4f846a8f48b9ab7d7ee0775a23a791823",
+      "public_module": "spatial.py",
+      "functions": "all numerical functions including synthetic_tests",
+      "adaptation": "Only module/entrypoint docstrings and __main__ print block changed; numerical functions retained."
+    },
+    {
+      "source_project_relative_path": "outputs/ds004054_tle_pattern_replication_20261026_v1/code/pattern_kernel.py",
+      "source_sha256": "8fe4055e69e151db2ac2cd7e9f92ddcd1d9c33b27e85f662fc17f4c2f9172280",
+      "public_module": "spatial_tle.py",
+      "functions": "all numerical functions",
+      "adaptation": "Replaced private hash-locked absolute import with .spatial; constants and functions unchanged."
+    },
+    {
+      "source_project_relative_path": "outputs/crosscohort_sert_specificity_20261026_v1/code/atlas_kernel.py",
+      "source_sha256": "0adffd3c63cbed3f1d1fd948665ff9ceb56ff0e8ef465e39fc653040157df0da",
+      "public_module": "atlas_specificity.py",
+      "functions": "all numerical functions",
+      "adaptation": "IO-free module copied; dat_conditioning only replaces hardcoded n=57 metadata with optional caller n_participants (no numerical change)."
+    },
+    {
+      "source_project_relative_path": "outputs/vns_sert_dat_conditioning_20261026_v1/code/dat_kernel.py",
+      "source_sha256": "b681eb5a1581d8742237521466da793e93ec0454f02be28ed1a81316f7a4d903",
+      "public_module": "dat_conditioning.py",
+      "functions": "all numerical functions",
+      "adaptation": "IO-free module copied; dat_conditioning only replaces hardcoded n=57 metadata with optional caller n_participants (no numerical change)."
+    },
+    {
+      "source_project_relative_path": "code/extension_metabolic_patterns_20261023_v1.py",
+      "source_sha256": "8c01991742d6259f7bd3e1c735136947ec15885b33f8fb84aa68aad92670bbd1",
+      "public_module": "vns_pattern.py",
+      "functions": [
+        "clr",
+        "fit",
+        "similarity",
+        "quantiles"
+      ],
+      "adaptation": "Pure functions extracted unchanged; removes original input joins and file writers."
+    },
+    {
+      "source_project_relative_path": "outputs/extension_molecular_robustness_20261023_v1/code/run_extension_molecular_robustness_20261023.py",
+      "source_sha256": "1f41f2d4bbbf7fc58ab55fe55bf5b7b9a6b0d673a04bfb1d4fb73cf2796bb04c",
+      "public_module": "vns_pattern.py",
+      "functions": [
+        "pc1",
+        "partial"
+      ],
+      "adaptation": "Pure functions extracted unchanged; scanner-stratified bootstrap separately adapted below."
+    },
+    {
+      "source_project_relative_path": "code/extension_molecular_specificity_20261023_v1.py",
+      "source_sha256": "0527ff0b880872e54dcfb2a6f2ad3fc9afd3b171974e57e01be35513dd0837af",
+      "public_module": "vns_spatial.py",
+      "functions": [
+        "norm",
+        "project",
+        "zscore",
+        "design",
+        "coefficients",
+        "bh",
+        "summary",
+        "graph",
+        "moran",
+        "spatial_diagnostics",
+        "test_family"
+      ],
+      "adaptation": "Pure functions extracted unchanged. Caller supplies verified mapping/design/graph/spins; no private joins."
+    },
+    {
+      "source_project_relative_path": "scripts/run_extension_molecular_annotation_20261023.py",
+      "source_sha256": "07ad516b3a8e767b7cffb07db8b60b0dfbd063e252db0f0b531247b3ac10c3b7",
+      "public_module": "molecular_annotation.py",
+      "functions": [
+        "normalize",
+        "bh",
+        "summarize",
+        "statistics"
+      ],
+      "adaptation": "Pure functions extracted unchanged; 1e-12 tail tie tolerance preserved."
+    }
+  ]
+}

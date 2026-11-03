@@ -10,7 +10,9 @@ Source-derived modules retain their relative source references and code-provenan
 
 ## Scope of verification
 
-Software preparation and synthetic numerical tests do not rerun the real study. In particular, they do not verify all scanner reconstruction steps, visual quality-control decisions, clinical adjudication, or the complete image-to-paper workflow. The original research code and outputs are kept separately and have not been overwritten by release preparation.
+Synthetic numerical tests do not rerun the real study. For version 0.3.0, a separate authorized check refitted all 300 outer C/CP/CPT fits from frozen study inputs: all held-out probabilities matched the original results exactly. PCA checks in the VNS, DEPICT and adult TLE cohorts also matched their frozen numerical outputs. See [the verification record](verification_20261103.json) for scope and environment.
+
+These checks do not verify scanner reconstruction, visual quality-control decisions, clinical adjudication, every sensitivity/resampling analysis, or the complete image-to-paper workflow. The original research code and outputs are kept separately and have not been overwritten by release preparation.
 
 For an authorized numerical reproduction, the required materials include the frozen predictor and outcome tables, their exact participant ordering, the saved outer and inner splits, the analysis configuration, and the execution environment. Matching random seeds alone is not enough if row order or library behavior differs.
 

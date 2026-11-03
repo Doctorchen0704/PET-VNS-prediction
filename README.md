@@ -1,12 +1,12 @@
 # PET-VNS-prediction
 
-Research code accompanying **Regional FDG uptake and response to vagus nerve stimulation in drug-resistant epilepsy: Associations and incremental prediction**.
+Research code accompanying **Preoperative regional FDG uptake and response to vagus nerve stimulation in drug-resistant epilepsy**.
 
 This repository is a portable, source-adapted release of numerical methods and feature definitions from the study. It is not a distribution of the private study workspace, a pretrained model, or a clinical prediction service. Patient data are not included.
 
 ## Scope
 
-Version 0.2.0 extends the regional feature, association and nested-prediction core with retuned ablations, same-center cross-scanner evaluation, development bootstrap, processing-sensitivity methods, and parameterized figure/table renderers. It also provides explicit FreeSurfer command recipes and sGTM feature extraction. See the [manuscript code map](docs/manuscript_code_map.md), [release scope](docs/release_scope.md) and [reproducibility notes](docs/reproducibility.md) for coverage and required inputs. This is not a one-command reproduction of the private image-to-paper workflow.
+Version 0.3.0 adds explicit-manifest DICOM conversion/BIDS promotion, a frozen-input prediction CLI, and the integrated metabolic-pattern/molecular-atlas numerical extension. The regional core, retuned ablations, cross-scanner evaluation, development bootstrap, processing sensitivity and figure/table interfaces are retained. See the [ordered workflow](docs/end_to_end.md), [spatial extension](docs/spatial_extension.md), [manuscript code map](docs/manuscript_code_map.md) and [release scope](docs/release_scope.md). A controlled companion supplies study-specific inputs and source records to authorized reviewers. This public repository alone does not contain the clinical data, identity decisions, anatomical assets or all exact publication-rendering dependencies.
 
 The clinical-only model is denoted C; CP adds six PET regional composites; CPT additionally includes six morphometric features. The regional features represent anatomical composites, not estimates of individual functional connectivity or mechanistic pathways.
 
@@ -19,9 +19,10 @@ python -m pip install -e ".[imaging,figures]"
 python -m unittest discover -s tests -v
 python examples/synthetic_demo.py
 python examples/synthetic_supplement.py
+python -m pet_vns_prediction.cli environment
 ```
 
-Tests use synthetic inputs. Passing them checks the specified software properties; it does not reproduce the manuscript results or establish external validity. The allowed dependency ranges in `pyproject.toml` are installation constraints, not a claim that all versions in those ranges have been tested.
+Public tests use synthetic inputs. Passing them checks the specified software properties; it does not reproduce the manuscript results or establish external validity. Real-data reproduction checks, where performed, are reported separately in `docs/verification_20261103.json`, without participant data. The allowed dependency ranges in `pyproject.toml` are installation constraints, not a claim that all versions in those ranges have been tested.
 
 The demonstrations use reduced repetitions, penalty grids and bootstrap counts for short artificial-data runs. The library's full study defaults remain available from `paper_settings()` and the documented supplemental interfaces. See the [input schema](docs/data_schema.md) before using authorized research data. For synthetic figure previews and caller-supplied anatomy requirements, see [figure documentation](docs/figures.md).
 
