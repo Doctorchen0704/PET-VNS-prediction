@@ -1,5 +1,8 @@
 # STEP07：固定模型的拟合与性能摘要
 
+本页保留原C/CP/CPT三模型流程。新增的PET设备调整C/CT/CP/CPT比较使用
+[独立子目录及说明](scanner_adjusted_four_models/README.md)；两条流程不能混用结果。
+
 只读STEP05的`model_input.json`，保留受试者顺序、C/CP/CPT字段及保存的全部内外层分折。
 不在这一步寻找更高AUC的参数或重新选择病例。
 

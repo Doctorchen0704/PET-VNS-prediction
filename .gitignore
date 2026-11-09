@@ -5,6 +5,8 @@ node_modules/
 results/
 work/
 study_inputs_PRIVATE/
+*_PRIVATE.*
+**/models/
 *.nii
 *.nii.gz
 *.mgz

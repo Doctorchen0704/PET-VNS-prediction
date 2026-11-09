@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "pet-vns-stepwise-analysis"
-version = "1.0.0"
+version = "1.1.0"
 description = "Manually run PET-VNS research analysis steps"
 requires-python = ">=3.11"
 dependencies = ["numpy>=1.26,<3", "pandas>=2.1,<4", "scipy>=1.11,<2", "scikit-learn>=1.4,<2", "threadpoolctl>=3.2,<4", "nibabel>=5.2,<6", "matplotlib>=3.10,<4", "Pillow>=10,<13"]

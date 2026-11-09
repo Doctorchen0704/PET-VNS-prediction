@@ -2,7 +2,8 @@
 
 [English guide](README_EN.md)
 
-手动脚本版1.0.0，共用已验证的0.3.0数值函数；本轮没有更换数值算法。
+手动脚本版1.1.0。原有STEP01–10及0.3.0基础数值库保持不变；本版新增独立的
+PET设备调整四模型比较及相应结果输出，不以新代码替换旧三模型流程。
 
 这是一套供研究人员手动运行的科研脚本。每次只启动一个STEP或其中一个子步骤，
 查看输出并完成相应检查后，再手动运行下一步。没有自动总控、后台续跑或自动纳排。
@@ -18,10 +19,21 @@
 | 4 | STEP04_feature_extraction | PET六区域/82脑区、T1特征；独立PVC子步骤 | Python；PVC另需FreeSurfer |
 | 5 | STEP05_clinical_data_assembly | 按研究编号合并临床、结局和影像表 | Python |
 | 6 | STEP06_regional_associations | 固定调整模型和完整FDR校正族 | Python |
-| 7 | STEP07_prediction_models | C/CP/CPT重复嵌套交叉验证；保存预测的摘要另列 | Python |
+| 7 | STEP07_prediction_models | 原C/CP/CPT流程；新增独立PET设备调整C/CT/CP/CPT流程 | Python |
 | 8 | STEP08_sensitivity_analyses | 消融、设备、bootstrap及处理敏感性，逐项运行 | Python |
 | 9 | STEP09_spatial_pattern_and_atlas | PC1、分子图谱、外部空间复现及条件分析 | Python＋有权限的图谱/外部输入 |
 | 10 | STEP10_tables_and_figures | 结果表、主图和补充图；可选标准脑资产生成 | Python；三维资产另需PyVista/VTK |
+
+## 新增的PET设备调整四模型分析
+
+入口和完整命令见[四模型运行说明](STEP07_prediction_models/scanner_adjusted_four_models/README.md)。
+四个模型均加入不受惩罚的PET设备对比项；CT包含临床及T1指标，CPT再加入PET指标。
+该流程沿用输入中保存的外层划分，仅在每个外层训练集中，使用原内层种子按
+“PET设备×结局”一次性构造3折内层划分。所有模型使用同一组新内层划分。
+不能将其写成“全部原内外层划分均未改变”，也不能与旧三模型的结果混用。
+
+准备输入、拟合每个模型和汇总结果均由操作者分别启动。真实临床数据、设备与研究
+编号对照、分折和个体预测不在公开仓库中。版本变更见[CHANGELOG.md](CHANGELOG.md)。
 
 ## 如何使用
 

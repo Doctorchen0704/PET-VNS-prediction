@@ -131,6 +131,31 @@ S2：必须给全96项关联和全14个处理预测。沿固定家族提取两�
 S2的AUC/Brier条件区间来自固定的患者平均OOF预测、seed20260910和2000共享重抽样（无模型拟合；单类抽样不替换），保留全部8版本指标后才选择展示六行。
 程序核对同一病例顺序、主/处理预测共同分折摘要和既定variant列名；不猜测缺失分支。
 
+## 10i PET设备调整后的四模型Figure3与Table2
+
+这是2026-11-09四模型分支的独立显示入口，不替换上述原三模型及消融显示。
+读取STEP07新分支保存的四模型预测、性能、条件区间及配对比较；不拟合模型、不重新bootstrap。
+
+```sh
+python STEP10_tables_and_figures/10i_scanner_four_model_outputs.py --model-input /private/step05/model_input.json --predictions /private/scanner_summary/predictions_PRIVATE.json --performance /work/scanner_summary/performance.json --intervals /work/scanner_summary/conditional_intervals.json --comparisons /work/scanner_summary/paired_comparisons.json --output /work/scanner_Figure3_Table2 --dpi 150
+```
+
+最终导出显式传入`--dpi 600`；仅需要表格和绘图输入时使用`--skip-render`。
+必须为新输出目录。脚本核对确切病例顺序、每个模型完整20次留出预测、AUC/Brier与保存指标一致、四个配对差值和区间版本一致。
+Table2的Brier差显示为“增加后减基础”，因此与源结果中“基础减增加后”的改善值符号相反，区间也同步反向。
+Figure3保留四条ROC、Clinical + PET的校准、四模型Brier、四组配对ΔAUC；主要比较为Clinical + PET + T1w减Clinical + T1w。
+校准截距使用斜率固定为1的offset截距，而非联合拟合模型中的截距。五个固定宽度分箱的Wilson区间仅作描述。
+
+输出`Figure3_plot_data.json`、`Table2_A_performance.csv`、`Table2_B_paired_comparisons.csv`、`display_provenance.json`；
+绘图时另有PNG、SVG、PDF及RGB TIFF。绘图输入为汇总数据，不输出研究编号或逐患者预测，但实际临床输入和源预测仍须受控保存。
+CSV保留数值精度，Word排版及三位小数显示属于后续编辑步骤。本入口不修改任何投稿文件，也不自动替换已批准图。
+
+合成数据测试：
+
+```sh
+python -m unittest discover -s STEP10_tables_and_figures/scanner_four_model_tests -v
+```
+
 ## 每张图的人工核对
 
 1. 输入的病例数、结局版本、ROI顺序和q家族是否与正文同一版本。

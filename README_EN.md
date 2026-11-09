@@ -4,8 +4,9 @@ This repository provides ordinary, independently invoked research scripts. It do
 the whole study automatically, make eligibility decisions, or approve image QC. Run one
 step, inspect its output, and start the next step yourself.
 
-The manual-script edition is 1.0.0. It retains the previously verified 0.3.0 numerical
-library; reorganizing the entry points does not change the study models or results.
+The manual-script edition is 1.1.0. The previous STEP01–10 scripts and 0.3.0 numerical
+library are retained. This edition adds a separate PET-scanner-adjusted four-model
+comparison; it does not replace the earlier three-model analysis.
 
 1. **STEP01**: dcm2niix conversion, explicit human series selection, BIDS organization.
 2. **STEP02**: single-subject FreeSurfer segmentation and manual review.
@@ -13,11 +14,24 @@ library; reorganizing the entry points does not change the study models or resul
 4. **STEP04**: PET regional/82-parcel and T1 features; separately invoked PVC substeps.
 5. **STEP05**: keyed clinical/outcome/feature joins with the saved cohort and folds.
 6. **STEP06**: prespecified regional associations and complete multiplicity families.
-7. **STEP07**: repeated nested C/CP/CPT fitting; saved-prediction summaries are separate.
+7. **STEP07**: original C/CP/CPT fitting and a separate scanner-adjusted C/CT/CP/CPT branch.
 8. **STEP08**: independently invoked ablation, scanner, development-bootstrap and processing analyses.
 9. **STEP09**: PC1, molecular annotation, spatial controls, external patterns and clinical bridge.
 10. **STEP10**: assemble plot inputs, render individual figures, produce descriptive tables,
     and optionally regenerate standard-brain assets.
+
+### Scanner-adjusted four-model comparison
+
+See [the four-model guide](STEP07_prediction_models/scanner_adjusted_four_models/README.md).
+All four models include an unpenalized PET-scanner contrast. CT contains the clinical
+and T1 features; CPT additionally contains PET features. Saved outer partitions are
+preserved. Within each outer training set, the original inner seed is reused to construct
+three inner folds stratified jointly by scanner and outcome. The same amended inner
+partitions are shared by all four models; they are not the earlier inner partitions.
+
+Input preparation, fitting each model and result summarization are separate manual
+commands. Participant-linked inputs, saved folds, predictions and fitted coefficients
+remain private. See [CHANGELOG.md](CHANGELOG.md) for release scope.
 
 Install Python dependencies from `environment/requirements.txt`, then use `python -m pip
 install -e . --no-deps` from the repository root. Image processing separately requires
